@@ -1,0 +1,157 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="DDAC_Assignment1.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>AlfaIndo - Mini Market</title>
+    <style>
+
+        .Register{
+            text-decoration:underline;
+        }
+
+        </style>
+
+    <script type = 'text/javascript' >
+        var appInsights=window.appInsights||function(config)
+        {
+            function r(config){ t[config] = function(){ var i = arguments; t.queue.push(function(){ t[config].apply(t, i)})} }
+            var t = { config:config},u=document,e=window,o='script',s=u.createElement(o),i,f;for(s.src=config.url||'//az416426.vo.msecnd.net/scripts/a/ai.0.js',u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=['Event','Exception','Metric','PageView','Trace','Ajax'];i.length;)r('track'+i.pop());return r('setAuthenticatedUserContext'),r('clearAuthenticatedUserContext'),config.disableExceptionTracking||(i='onerror',r('_'+i),f=e[i],e[i]=function(config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o),s}),t
+        }({
+            instrumentationKey:'57cecbc2-9be1-4939-bff8-c940767e6921'
+        });
+        
+        window.appInsights=appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+
+<body>
+<form id="form1" runat="server">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Alfaindo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto text-center">
+          <li class="nav-item">
+            <a class="nav-link" href="Homepage">Homepage</a> <!--Done-->
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="Contact">Contact</a>  <!--Done-->
+          </li>
+        </ul>
+
+         <%
+            if (Session["uType"] == null)
+            {%>
+                <ul class="navbar-nav float-left">
+                     <li class="nav-item">
+                     <asp:Button ID="BtnLogin" runat="server" class="btn btn-outline-primary" Text="Login" OnClick="BtnLogin_Click" /> <!--Done-->
+                        &nbsp;&nbsp;&nbsp;
+                     </li>
+                </ul>
+                <ul class="navbar-nav float-left">
+                     <li class="nav-item">
+                     <asp:Button ID="BtnRegister" runat="server" class="btn btn-outline-success" Text="Register" OnClick="BtnRegister_Click" /> <!--Done-->
+                     </li>
+                </ul>
+            <%}
+                else if (Session["uType"].Equals("Customer"))
+                {%>
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="Profile">My Profile</a>   <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="BuyItems">Buy Items</a>   <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="CheckOut">Check Out</a>   <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <asp:Button ID="BtnLogout" runat="server" class="btn btn-outline-danger" Text ="Logout" OnClick="BtnLogout_Click" />
+                        </li>
+                    </ul>
+                <%}
+                else if (Session["uType"].Equals("Delivery"))
+                {%>
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="DeliveryOrder">Delivery Orders</a>    <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="UpdateOrder">Update Orders</a>    <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <asp:Button ID="BtnLogout2" runat="server" class="btn btn-outline-danger" Text ="Logout" OnClick="BtnLogout_Click" />   <!--Done-->
+                        </li>
+                    </ul>
+                <%}
+                else if (Session["uType"].Equals("Admin"))
+                {%>
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="ManageUser">Manage User</a>   <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="ManageOrders">Manage Orders</a>   <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <a class="nav-link" href="Orders">Orders List</a>   <!--Done-->
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-left">
+                        <li class="nav-item">
+                        <asp:Button ID="BtnLogout3" runat="server" class="btn btn-outline-danger" Text ="Logout" OnClick="BtnLogout_Click" />   <!--Done-->
+                        </li>
+                    </ul>
+                <%}
+            %>
+
+  </div>
+</nav>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - AlfaIndo Mini Market Delivery System</p>
+            </footer>
+        </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</form>
+</body>
+</html>
